@@ -23,7 +23,7 @@ namespace lista4
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static List<Student> m_oPersonList = new List<Student>();
+        public static List<Person> m_oPersonList = new List<Person>();
 
         public MainWindow()
         {
@@ -37,21 +37,21 @@ namespace lista4
             {
                 using (var reader = new StreamReader("PersonList.xml"))
                 {
-                    XmlSerializer deserializer = new XmlSerializer(typeof(List<Student>),
+                    XmlSerializer deserializer = new XmlSerializer(typeof(List<Person>),
                         new XmlRootAttribute("ArrayOfPerson"));
-                    m_oPersonList = (List<Student>)deserializer.Deserialize(reader);
+                    m_oPersonList = (List<Person>)deserializer.Deserialize(reader);
                 }
             }
             catch
             {
-                MessageBox.Show("Brak pliku do załadowania!", "Uwaga", MessageBoxButton.OK);
+               MessageBox.Show("Brak pliku do załadowania!", "Uwaga", MessageBoxButton.OK);
             }
 
             if (m_oPersonList.Count == 0)
             {
-                m_oPersonList.Add(new Student(1, "Jan", "Kowalski", 25, 9909090, "C:\\xampp\\htdocs\\pro\\img\\arrow-left.png"));
-                m_oPersonList.Add(new Student(2, "Adam", "Nowak", 24, 899898030, "C:\\xampp\\htdocs\\pro\\img\\arrow-left.png"));
-                m_oPersonList.Add(new Student(3, "Agnieszka", "Kowalczyk", 20, 0032329309, "C:\\xampp\\htdocs\\pro\\img\\arrow-left.png"));
+                m_oPersonList.Add(new Person(1, "Jan", "Kowalski", 25, 9909090, "C:\\xampp\\htdocs\\pro\\img\\arrow-left.png"));
+                m_oPersonList.Add(new Person(2, "Adam", "Nowak", 24, 899898030, "C:\\xampp\\htdocs\\pro\\img\\arrow-left.png"));
+                m_oPersonList.Add(new Person(3, "Agnieszka", "Kowalczyk", 20, 0032329309, "C:\\xampp\\htdocs\\pro\\img\\arrow-left.png"));
             }
 
 
@@ -60,8 +60,8 @@ namespace lista4
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-            window2.Show();
+            Window2 win2 = new Window2();
+            win2.Show();
         }
 
         private void Button_Click2(object sender, RoutedEventArgs e)
@@ -69,12 +69,15 @@ namespace lista4
             Window3 win3 = new Window3(id.Text);
             win3.Show();
         }
+
+        //Refresh
         private void Button_Click3(object sender, RoutedEventArgs e)
         {
-            m_oPersonList = null;
+            lstPersons.ItemsSource = null;
             lstPersons.ItemsSource = m_oPersonList;
         }
 
+        //Save
         private void Button_Click4(object sender, RoutedEventArgs e)
         {
             var serializer = new XmlSerializer(m_oPersonList.GetType());
@@ -84,12 +87,13 @@ namespace lista4
             }
         }
 
+        //Load
         private void Button_Click5(object sender, RoutedEventArgs e)
         {
-            lstPersons.ItemsSource = m_oPersonList;
+            InitBinding();
         }
 
-        public class Student
+        public class Person
         {
             [XmlAttribute("id")]
             public int StudentId { get; set; }
@@ -109,7 +113,7 @@ namespace lista4
             [XmlElement("Obraz")]
             public string obraz { get; set; }
 
-            public Student(int nStudentId, string sFirstName, string sLastName, int nAge, long lPesel, string Obraz)
+            public Person(int nStudentId, string sFirstName, string sLastName, int nAge, long lPesel, string Obraz)
             {
                 StudentId = nStudentId;
                 FirstName = sFirstName;
@@ -119,7 +123,7 @@ namespace lista4
                 obraz = Obraz;
             }
 
-            public Student()
+            public Person()
             {
                 StudentId = 0;
                 FirstName = "Janusz";

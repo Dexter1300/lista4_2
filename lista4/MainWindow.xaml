@@ -22,7 +22,7 @@
                 <GridView AllowsColumnReorder="True">
                     <GridView.Columns>
                         <GridViewColumn Header="Id"
-                            DisplayMemberBinding="{Binding PersonId}" />
+                            DisplayMemberBinding="{Binding StudentId}" />
                         <GridViewColumn Header="Imię"
                             DisplayMemberBinding="{Binding FirstName}" />
                         <GridViewColumn Header="Nazwisko"
