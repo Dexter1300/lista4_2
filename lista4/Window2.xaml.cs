@@ -55,5 +55,20 @@ namespace lista4
         {
             e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
         }
+
+        private void wiek_previews(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
+        }
+
+        private void nazwisko_preview(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^a-zA-Z]").IsMatch(e.Text);
+        }
+
+        private void imie_preview(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^a-zA-Z]").IsMatch(e.Text);
+        }
     }
 }

@@ -17,7 +17,7 @@
         <Button Content="Zapisz" Grid.Row="0" Click="Button_Click4" Height="30" Width="100" Margin="96,160,96,20"/>
         <Button Content="Load" Grid.Row="0" Click="Button_Click5" Height="30" Width="100" Margin="96,20,96,160"/>
        
-        <TextBox Grid.Row="0" Height="25" Width="25" Margin="140,5,10,5" Name="id"/>
+        <TextBox Grid.Row="0" Height="25" Width="25" Margin="140,5,10,5" Name="id" PreviewTextInput="Id_PreviewTextInput"/>
         <ListView Name="lstPersons" Grid.Row="1">
             <ListView.View>
                 <GridView AllowsColumnReorder="True">

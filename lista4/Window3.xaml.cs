@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -87,6 +88,26 @@ namespace lista4
             }
             MainWindow.Person oFoundPerson = MainWindow.m_oPersonList.Find(oElement => oElement.StudentId == Convert.ToInt32(idP));
             oFoundPerson.obraz = Convert.ToString(Picture.Source);
+        }
+
+        private void imie_preview(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^a-zA-Z]").IsMatch(e.Text);
+        }
+
+        private void Nazwisko_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^a-zA-Z]").IsMatch(e.Text);
+        }
+
+        private void Wiek_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
+        }
+
+        private void Pesel_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
         }
     }
 }
