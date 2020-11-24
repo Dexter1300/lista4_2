@@ -53,7 +53,10 @@ namespace lista4
             nazwisko.Text = oFoundPerson.LastName;
             wiek.Text = Convert.ToString(oFoundPerson.Age);
             Pesel.Text = Convert.ToString(oFoundPerson.Pesel);
+            Uri image = new Uri(oFoundPerson.obraz);
+            Picture.Source = new BitmapImage(image);
             idP = id;
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -67,12 +70,19 @@ namespace lista4
 
         private void Button_Click2(object sender, RoutedEventArgs e)
         {
-            MainWindow.Person oFoundPerson = MainWindow.m_oPersonList.Find(oElement => oElement.StudentId == Convert.ToInt32(idP));
-            oFoundPerson.FirstName = imie.Text;
-            oFoundPerson.LastName = nazwisko.Text;
-            oFoundPerson.Age = Convert.ToInt32(wiek.Text);
-            oFoundPerson.Pesel = Convert.ToInt64(Pesel.Text);
-            MessageBox.Show("Edytowano dane"); 
+            if (imie.Text == "" || nazwisko.Text == "" || wiek.Text == "" || Pesel.Text == "")
+            {
+                MessageBox.Show("Wprowadz wszystkie dane");
+            }
+            else
+            {
+                MainWindow.Person oFoundPerson = MainWindow.m_oPersonList.Find(oElement => oElement.StudentId == Convert.ToInt32(idP));
+                oFoundPerson.FirstName = imie.Text;
+                oFoundPerson.LastName = nazwisko.Text;
+                oFoundPerson.Age = Convert.ToInt32(wiek.Text);
+                oFoundPerson.Pesel = Convert.ToInt64(Pesel.Text);
+                MessageBox.Show("Edytowano dane");
+            }
         }
 
         private void Button_Click3(object sender, RoutedEventArgs e)

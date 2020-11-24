@@ -32,10 +32,17 @@ namespace lista4
 
         private void Button_Click2(object sender, RoutedEventArgs e)
         {
+            if (imie.Text == "" || nazwisko.Text == "" || wiek.Text == "" || Pesel.Text == "")
+            {
+                MessageBox.Show("Wprowadz wszystkie dane");
+            }
+            else
+            {
+                MainWindow.m_oPersonList.Add(new MainWindow.Person() { StudentId = MainWindow.m_oPersonList.Count + 1, FirstName = imie.Text, LastName = nazwisko.Text, Age = Convert.ToInt16(wiek.Text), Pesel = Convert.ToInt64(Pesel.Text), obraz = sciezka });
 
-            MainWindow.m_oPersonList.Add(new MainWindow.Person() { StudentId = MainWindow.m_oPersonList.Count + 1, FirstName = imie.Text, LastName = nazwisko.Text, Age = Convert.ToInt16(wiek.Text), Pesel = Convert.ToInt64(Pesel.Text), obraz = sciezka });
-           
-            MessageBox.Show("Dodano nową osobę");
+                MessageBox.Show("Dodano nową osobę");
+            }
+            
         }
 
         private void Button_Click3(object sender, RoutedEventArgs e)
